@@ -22,6 +22,11 @@ public class Main {
         ArrayList<Book> bookArrayList = gson.fromJson(reader, booksType);
         Books books = new Books(bookArrayList);
 
+        System.out.println(books.getBooks().size());
+        for (Book book : books.getBooks()) {
+            System.out.println(book);
+        }
+
 
     }
 }

@@ -11,4 +11,9 @@ public class Book {
     @SerializedName("metadata")
     private MetaData metaData;
     private Metrics metrics;
+
+    @Override
+    public String toString() {
+        return "Title: " + bibliography.getTitle();
+    }
 }

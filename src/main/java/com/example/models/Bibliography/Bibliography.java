@@ -6,4 +6,8 @@ public class Bibliography {
     private String title;
     private String type;
     private Author author;
+    public String getTitle() {
+        return title;
+    }
+
 }
