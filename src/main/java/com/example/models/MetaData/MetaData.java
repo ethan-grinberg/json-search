@@ -1,4 +1,4 @@
-package com.example.models;
+package com.example.models.MetaData;
 
 public class MetaData {
     private int downloads;

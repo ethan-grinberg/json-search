@@ -1,4 +1,4 @@
-package com.example.models;
+package com.example.models.Bibliography;
 
 public class Bibliography {
     private String languages;

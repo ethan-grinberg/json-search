@@ -1,4 +1,4 @@
-package com.example.models;
+package com.example.models.Metrics;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,4 +1,4 @@
-package com.example.models;
+package com.example.models.Metrics;
 
 public class Metrics {
     private Difficulty difficulty;
