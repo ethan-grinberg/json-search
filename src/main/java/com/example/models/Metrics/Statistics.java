@@ -3,7 +3,6 @@ package com.example.models.Metrics;
 import com.google.gson.annotations.SerializedName;
 
 public class Statistics {
-    //TODO make sure annotation works correctly
     @SerializedName("average sentence length")
     private float averageSentenceLength;
     @SerializedName("characters")
@@ -13,6 +12,7 @@ public class Statistics {
     @SerializedName("words")
     private int numOfWords;
 
+    public Statistics() { }
     //TODO add java docs for public methods
     public float getAverageSentenceLength() {
         return averageSentenceLength;

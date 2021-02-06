@@ -5,7 +5,7 @@ public class Metrics {
     private Sentiments sentiments;
     private Statistics statistics;
     //TODO add javadocs for public methods
-
+    public Metrics() { }
 
     public Difficulty getDifficulty() {
         return difficulty;
@@ -18,6 +18,7 @@ public class Metrics {
     public Statistics getStatistics() {
         return statistics;
     }
+
     @Override
     public String toString() {
         return "Metrics\n[statistics: " + statistics.getNumOfCharacters() + ", "

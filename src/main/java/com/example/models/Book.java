@@ -6,11 +6,13 @@ import com.example.models.Metrics.Metrics;
 import com.google.gson.annotations.SerializedName;
 
 public class Book {
-    //TODO check to make sure annotation works right
     private Bibliography bibliography;
     @SerializedName("metadata")
     private MetaData metaData;
     private Metrics metrics;
+
+    //TODO add javadoc for public methods
+    public Book() { }
 
     @Override
     public String toString() {

@@ -14,6 +14,8 @@ public class MetaData {
     public int getId() {
         return id;
     }
+
+    public MetaData() { }
     //TODO add java docs for all public methods
     public String toString() {
         return "MetaData: " + downloads + ", " + rank + ", " + id;

@@ -9,6 +9,8 @@ public class Author {
     private String birthYear;
     @SerializedName("death")
     private String deathYear;
+
+    public Author() { }
     //TODO add java docs for public methods
     @Override
     public String toString() {
