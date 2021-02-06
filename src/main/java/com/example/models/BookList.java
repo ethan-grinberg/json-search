@@ -10,10 +10,18 @@ import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class Books {
-    //TODO javadoc comment
+public class BookList {
+    //TODO javadoc comments
+    private List<Book> bookList;
+    public BookList() { }
 
-    public static List<Book> loadBooksFromJsonFile(String filePath) throws FileNotFoundException {
+    public BookList(List<Book> setBookList) {
+        if (setBookList == null) {
+            throw new IllegalArgumentException();
+        }
+        bookList = setBookList;
+    }
+    public void loadBooksFromJsonFile(String filePath) throws FileNotFoundException {
         if (filePath == null) {
             throw new IllegalArgumentException();
         }
@@ -21,10 +29,12 @@ public class Books {
         File file = new File(filePath);
         JsonReader reader = new JsonReader(new FileReader(file));
         Type booksType = new TypeToken<List<Book>>(){}.getType();
-        List<Book> bookList = gson.fromJson(reader, booksType);
+        List<Book> books = gson.fromJson(reader, booksType);
 
-        return bookList;
+        bookList = books;
     }
 
-
+    public List<Book> getBookList() {
+        return bookList;
+    }
 }

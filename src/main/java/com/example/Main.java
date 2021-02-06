@@ -1,18 +1,20 @@
 package com.example;
 
 import com.example.models.Book;
-import com.example.models.Books;
+import com.example.models.BookList;
 import java.io.IOException;
 import java.util.List;
 
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        List<Book> books = Books.loadBooksFromJsonFile(
-                "C:\\Users\\ethan\\Documents\\School\\CS126\\Json\\src\\main\\resources\\classics.json");
+        BookList books = new BookList();
+        books.loadBooksFromJsonFile("C:\\Users\\ethan\\Documents\\School\\CS126" +
+                                    "\\Json\\src\\main\\resources\\classics.json");
+        List<Book> bookList = books.getBookList();
 
-        System.out.println(books.size());
-        for (Book book : books) {
+        System.out.println(bookList.size());
+        for (Book book : bookList) {
             System.out.println(book);
         }
     }
