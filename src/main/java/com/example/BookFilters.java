@@ -3,9 +3,18 @@ import com.example.models.Book;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 //TODO add all javadocs (utility class)
 public final class BookFilters {
+    //Helper function that returns the string in lowercase without spaces or commas.
+    //Code below delivered from:
+    //https://www.geeksforgeeks.org/how-to-remove-all-white-spaces-from-a-string-in-java/
+    private static String formatStringForSearch(String str) {
+        str = str.toLowerCase().replaceAll("\\s", "");
+        return str.replaceAll(",", "");
+    }
+
     public static List<Book> filterBySubjects(
             final List<Book> bookList,
             final String subject) {
@@ -13,15 +22,12 @@ public final class BookFilters {
         if (bookList == null || subject == null) {
             throw new IllegalArgumentException();
         }
-        //Code below delivered from:
-        //https://www.geeksforgeeks.org/how-to-remove-all-white-spaces-from-a-string-in-java/
-        //Converts string to lowercase and removes all spaces.
-        String subjectFormatted = subject.toLowerCase().replaceAll("\\s", "");
+        String subjectFormatted = formatStringForSearch(subject);
 
         List<Book> booksFilteredBySubject = new ArrayList<>();
         for (Book book : bookList) {
             String bookSubject = book.getBibliography().getSubjects();
-            String bookSubjectFormatted = bookSubject.toLowerCase().replaceAll("\\s", "");
+            String bookSubjectFormatted = formatStringForSearch(bookSubject);
 
             if (bookSubjectFormatted.contains(subjectFormatted)) {
                 booksFilteredBySubject.add(book);
@@ -32,7 +38,7 @@ public final class BookFilters {
         }
         return booksFilteredBySubject;
     }
-    //TODO add javadoc, readabilityIndex is uppper bound
+    //TODO add javadoc, readabilityIndex is upper bound
     public static List<Book> filterByReadability(
             final List<Book> bookList,
             final float readabilityIndex) {
@@ -85,5 +91,26 @@ public final class BookFilters {
             throw new IllegalArgumentException();
         }
         return booksFilteredByAuthorYear;
+    }
+    public static List<Book> filterByAuthorName(
+            final List<Book> bookList,
+            final String author) {
+
+        if (bookList == null || author == null) {
+            throw new IllegalArgumentException();
+        }
+        String authorFormatted = formatStringForSearch(author);
+        List<Book> filteredByAuthor = new ArrayList<>();
+        for (Book book : bookList) {
+            String bookAuthor = book.getBibliography().getAuthor().getName();
+            String formatBookAuthor = formatStringForSearch(bookAuthor);
+            if (formatBookAuthor.contains(authorFormatted)) {
+                filteredByAuthor.add(book);
+            }
+        }
+        if (filteredByAuthor.size() == 0) {
+            throw new IllegalArgumentException();
+        }
+        return filteredByAuthor;
     }
 }
