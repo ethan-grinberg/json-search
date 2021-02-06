@@ -14,6 +14,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Title: " + bibliography.getTitle();
+        return bibliography + "\n" + metrics
+                + "\n" + metaData + "\n";
     }
 }
