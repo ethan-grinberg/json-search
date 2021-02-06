@@ -9,6 +9,8 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 public class BooksFromJsonFilterTest {
     private List<Book> books;
 
@@ -17,11 +19,39 @@ public class BooksFromJsonFilterTest {
     public void setUp() throws FileNotFoundException {
         BookList bookList = new BookList();
         bookList.loadBooksFromJsonFile(
-    "C:\\Users\\ethan\\Documents\\School\\CS126" +
-            "\\Json\\src\\main\\resources\\classics.json");
+        "C:\\Users\\ethan\\Documents\\School\\CS126" +
+                "\\Json\\src\\main\\resources\\classics.json");
         books = bookList.getBookList();
     }
+    //Filter by subject tests.
     @Test
-    public void sanityCheck() {
+    public void testFilterBySubjectFound() {
+        List<Book> filteredBooks = BookFilters.filterBySubjects(books, " FICtion   ");
+        for (Book book : filteredBooks) {
+            String subjects = book.getBibliography().getSubjects().toLowerCase();
+            assertEquals(true, subjects.contains("fiction"));
+        }
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testFilterBySubjectNotFound() {
+        List<Book> filteredBooks = BookFilters.filterBySubjects(books, "asdfasdflkjiie12");
+    }
+
+    //Filtered by readability tests.
+    @Test(expected = IllegalArgumentException.class)
+    public void testFilterByReadabilityIllegalNumber() {
+        List<Book> filteredBooks = BookFilters.filterByReadability(books, (float) -5.6);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testFilterByReadabilityNotFound() {
+        List<Book> filteredBooks = BookFilters.filterByReadability(books, (float) 2);
+    }
+    @Test
+    public void testFilterByReadabilityValid() {
+        List<Book> filteredBooks = BookFilters.filterByReadability(books, (float) 6.3);
+        for (Book book : filteredBooks) {
+            float readabilityIndex = (float) book.getMetrics().getDifficulty().getReadabilityIndex();
+            assertEquals(true,  readabilityIndex <= (float) 6.3);
+        }
     }
 }

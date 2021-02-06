@@ -14,15 +14,34 @@ public final class BookFilters {
         //Converts string to lowercase and removes all spaces.
         String subjectFormatted = subject.toLowerCase().replaceAll("\\s", "");
 
-        List<Book> filteredBySubject = new ArrayList<>();
+        List<Book> booksFilteredBySubject = new ArrayList<>();
         for (Book book : bookList) {
             String bookSubject = book.getBibliography().getSubjects();
             String bookSubjectFormatted = bookSubject.toLowerCase().replaceAll("\\s", "");
 
             if (bookSubjectFormatted.contains(subjectFormatted)) {
-                filteredBySubject.add(book);
+                booksFilteredBySubject.add(book);
             }
         }
-        return filteredBySubject;
+        if (booksFilteredBySubject.size() == 0) {
+            throw new IllegalArgumentException();
+        }
+        return booksFilteredBySubject;
+    }
+    //TODO add javadoc, readabilityIndex is uppper bound
+    public static List<Book> filterByReadability(final List<Book> bookList, final float readabilityIndex) {
+        if (bookList == null || readabilityIndex < 0) {
+            throw new IllegalArgumentException();
+        }
+        List<Book> booksFilteredByReadability = new ArrayList<>();
+        for (Book book : bookList) {
+            if (book.getMetrics().getDifficulty().getReadabilityIndex() <= readabilityIndex) {
+                booksFilteredByReadability.add(book);
+            }
+        }
+        if (booksFilteredByReadability.size() == 0) {
+            throw new IllegalArgumentException();
+        }
+        return booksFilteredByReadability;
     }
 }

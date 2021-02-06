@@ -3,6 +3,7 @@ package com.example;
 import com.example.models.Book;
 import com.example.models.BookList;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -18,7 +19,11 @@ public class Main {
             System.out.println(book);
         }
          */
-
+        List<Book> filteredBooks = BookFilters.filterByReadability(bookList, (float) 6.3);
+        for (Book book : filteredBooks) {
+            System.out.println(book.getMetrics().getDifficulty().getReadabilityIndex() <= 6.3);
+        }
+        System.out.println("-----------------");
         List<Book> subjectFilter = BookFilters.filterBySubjects(bookList, "Fiction");
         for (Book book : subjectFilter) {
             System.out.println(book);
