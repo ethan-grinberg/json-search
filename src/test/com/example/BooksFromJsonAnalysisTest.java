@@ -9,14 +9,14 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 public class BooksFromJsonAnalysisTest {
-    private List<Book> bookList;
+    private List<Book> books;
 
     @Before
     public void setUp() throws FileNotFoundException {
-        BookList books = new BookList();
-        books.loadBooksFromJsonFile(
+        BookList bookList = new BookList();
+        bookList.loadBooksFromJsonFile(
     "C:\\Users\\ethan\\Documents\\School\\CS126" +
             "\\Json\\src\\main\\resources\\classics.json");
-        bookList = books.getBookList();
+        books = bookList.getBookList();
     }
 }

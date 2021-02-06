@@ -12,9 +12,15 @@ public class Main {
         books.loadBooksFromJsonFile("C:\\Users\\ethan\\Documents\\School\\CS126" +
                                     "\\Json\\src\\main\\resources\\classics.json");
         List<Book> bookList = books.getBookList();
-
+        /*
         System.out.println(bookList.size());
         for (Book book : bookList) {
+            System.out.println(book);
+        }
+         */
+
+        List<Book> subjectFilter = BookFilters.filterBySubjects(bookList, "Fiction");
+        for (Book book : subjectFilter) {
             System.out.println(book);
         }
     }

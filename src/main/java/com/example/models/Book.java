@@ -14,6 +14,18 @@ public class Book {
     //TODO add javadoc for public methods
     public Book() { }
 
+    public Bibliography getBibliography() {
+        return bibliography;
+    }
+
+    public MetaData getMetaData() {
+        return metaData;
+    }
+
+    public Metrics getMetrics() {
+        return metrics;
+    }
+
     @Override
     public String toString() {
         return bibliography + "\n" + metrics
