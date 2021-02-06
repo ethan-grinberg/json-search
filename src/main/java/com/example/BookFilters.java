@@ -53,9 +53,9 @@ public final class BookFilters {
     }
     //TODO books can be before or after author death year Inclusive
     //TODO how to format big function argument?
-    public static List<Book> filterByAuthorDeathYear(
-            final List<Book> bookList, final int deathYear,
-            boolean beforeDeathYear) {
+    public static List<Book> filterByAuthorBirthYear(
+            final List<Book> bookList, final int birthYear,
+            boolean beforeBirthYear) {
 
         if (bookList == null) {
             throw new IllegalArgumentException();
@@ -64,18 +64,19 @@ public final class BookFilters {
         //https://stackoverflow.com/questions/136419/get-integer-value-of-the-current-year-in-java
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         //BC years are formatted as negative ints.
-        if (deathYear > currentYear) {
+        int beginningOfTime = -4000;
+        if (birthYear >= currentYear || birthYear < beginningOfTime) {
             throw new IllegalArgumentException();
         }
         List<Book> booksFilteredByAuthorYear = new ArrayList<>();
         for (Book book : bookList) {
-            int authorDeathYear = book.getBibliography().getAuthor().getDeathYear();
-            if (beforeDeathYear) {
-                if (authorDeathYear <= deathYear) {
+            int authorBirthYear = book.getBibliography().getAuthor().getBirthYear();
+            if (beforeBirthYear) {
+                if (authorBirthYear <= birthYear) {
                     booksFilteredByAuthorYear.add(book);
                 }
             } else {
-                if (authorDeathYear >= deathYear) {
+                if (authorBirthYear >= birthYear) {
                     booksFilteredByAuthorYear.add(book);
                 }
             }

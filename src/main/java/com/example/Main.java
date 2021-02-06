@@ -19,9 +19,9 @@ public class Main {
             System.out.println(book);
         }
          */
-        List<Book> filteredBooks = BookFilters.filterByReadability(bookList, (float) 6.3);
+        List<Book> filteredBooks = BookFilters.filterByAuthorBirthYear(bookList,1950, false);
         for (Book book : filteredBooks) {
-            System.out.println(book.getMetrics().getDifficulty().getReadabilityIndex() <= 6.3);
+            System.out.println(book);
         }
         System.out.println("-----------------");
         List<Book> subjectFilter = BookFilters.filterBySubjects(bookList, "Fiction");
