@@ -11,30 +11,32 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class BookList {
-    //TODO javadoc comments
-    private List<Book> bookList;
-    public BookList() { }
+  // TODO javadoc comments
+  private List<Book> bookList;
 
-    //User has the option to create a booklist by passing in a list or a json file
-    public BookList(List<Book> setBookList) {
-        if (setBookList == null) {
-            throw new IllegalArgumentException();
-        }
-        bookList = setBookList;
-    }
-    public void loadBooksFromJsonFile(String filePath) throws FileNotFoundException {
-        if (filePath == null) {
-            throw new IllegalArgumentException();
-        }
-        Gson gson = new Gson();
-        File file = new File(filePath);
-        JsonReader reader = new JsonReader(new FileReader(file));
-        Type booksType = new TypeToken<List<Book>>(){}.getType();
+  public BookList() {}
 
-        bookList = gson.fromJson(reader, booksType);
+  // User has the option to create a booklist by passing in a list or a json file
+  public BookList(List<Book> setBookList) {
+    if (setBookList == null) {
+      throw new IllegalArgumentException();
     }
+    bookList = setBookList;
+  }
 
-    public List<Book> getBookList() {
-        return bookList;
+  public void loadBooksFromJsonFile(String filePath) throws FileNotFoundException {
+    if (filePath == null) {
+      throw new IllegalArgumentException();
     }
+    Gson gson = new Gson();
+    File file = new File(filePath);
+    JsonReader reader = new JsonReader(new FileReader(file));
+    Type booksType = new TypeToken<List<Book>>() {}.getType();
+
+    bookList = gson.fromJson(reader, booksType);
+  }
+
+  public List<Book> getBookList() {
+    return bookList;
+  }
 }
