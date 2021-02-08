@@ -5,6 +5,7 @@ import com.example.models.BookList;
 import org.junit.Before;
 import org.junit.Test;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -55,17 +56,31 @@ public class BooksFromJsonAnalysisTest {
     assertEquals(16228.0, averageNumOfWords, .001);
   }
   @Test(expected = IllegalArgumentException.class)
-  public void testAverageNumberOfWordsReadabilityInvalid() {
+  public void testAverageNumbWordsReadabilityInvalid() {
     double averageNumOfWords = BookAnalyses.averageNumberOfWordsByReadability(fullBookList.getBookList(), (float) -5);
   }
   @Test(expected = IllegalArgumentException.class)
-  public void testAverageNumberOfWordsReadabilityNotFound() {
+  public void testAverageNumWordsReadabilityNotFound() {
     BookList bookSubset = new BookList(fullBookList.getBookList().subList(0, 5));
     double averageNumOfWords = BookAnalyses.averageNumberOfWordsByReadability(bookSubset.getBookList(), (float) 6);
   }
   @Test(expected = IllegalArgumentException.class)
-  public void testAverageNumberOfWordsReadabilityNullList() {
+  public void testAverageNumWordsReadabilityNullList() {
     double averageNumOfWords = BookAnalyses.averageNumberOfWordsByReadability(null, (float) 6);
   }
-
+  //Average number of downloads tests
+  @Test
+  public void testAverageNumDownloadsValid() {
+    BookList bookSubset = new BookList(fullBookList.getBookList().subList(5, 10));
+    double averageNumDownloads = BookAnalyses.averageNumOfBookDownloads(bookSubset.getBookList());
+    assertEquals(13328.2, averageNumDownloads, .001);
+  }
+  @Test(expected = IllegalArgumentException.class)
+  public void testAverageNumDownloadsNullList() {
+    double averageNumDownloads = BookAnalyses.averageNumOfBookDownloads(null);
+  }
+  @Test(expected = IllegalArgumentException.class)
+  public void testAverageNumDownloadsEmptyList() {
+    double averageNumDownloads = BookAnalyses.averageNumOfBookDownloads(new ArrayList<Book>());
+  }
 }

@@ -40,10 +40,9 @@ public final class BookAnalyses {
     if (bookCount == 0) {
       throw new IllegalArgumentException();
     }
-    double averageNumWords = totalNumberOfWords / bookCount;
-    return averageNumWords;
+    return (double ) totalNumberOfWords / bookCount;
   }
-  public double averageNumOfBookDownloads(final List<Book> bookList) {
+  public static double averageNumOfBookDownloads(final List<Book> bookList) {
     if (bookList == null || bookList.size() == 0) {
       throw new IllegalArgumentException();
     }
@@ -53,7 +52,6 @@ public final class BookAnalyses {
       totalDownloads += book.getMetaData().getDownloads();
       bookCount++;
     }
-    double averageNumDownloads = totalDownloads / bookCount;
-    return averageNumDownloads;
+    return (double) totalDownloads / bookCount;
   }
 }
