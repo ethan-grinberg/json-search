@@ -7,12 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class FilterBooksFromJsonTest {
+public class BooksFromJsonFilterTest {
     private List<Book> books;
 
     //TODO figure out style for long strings
@@ -23,6 +22,10 @@ public class FilterBooksFromJsonTest {
         "C:\\Users\\ethan\\Documents\\School\\CS126" +
                 "\\Json\\src\\main\\resources\\classics.json");
         books = bookList.getBookList();
+    }
+    @Test
+    public void testLoadBooksFromJsonFile() {
+        assertEquals(1006, books.size());
     }
     //Books filtered by subjects tests.
     @Test

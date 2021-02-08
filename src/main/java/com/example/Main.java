@@ -18,7 +18,8 @@ public class Main {
             System.out.println(book);
         }
          */
-        List<Book> filteredBooks = BookFilters.filterByAuthorBirthYear(bookList,1950, false);
+        System.out.println(BookAnalyses.averageAuthorPolarity(bookList, "vonnegut kurt"));
+        List<Book> filteredBooks = BookFilters.filterByAuthorBirthYear(bookList,1000, false);
         for (Book book : filteredBooks) {
             System.out.println(book);
         }
