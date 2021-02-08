@@ -15,6 +15,7 @@ public class BookList {
     private List<Book> bookList;
     public BookList() { }
 
+    //User has the option to create a booklist by passing in a list or a json file
     public BookList(List<Book> setBookList) {
         if (setBookList == null) {
             throw new IllegalArgumentException();
@@ -29,9 +30,8 @@ public class BookList {
         File file = new File(filePath);
         JsonReader reader = new JsonReader(new FileReader(file));
         Type booksType = new TypeToken<List<Book>>(){}.getType();
-        List<Book> books = gson.fromJson(reader, booksType);
 
-        bookList = books;
+        bookList = gson.fromJson(reader, booksType);
     }
 
     public List<Book> getBookList() {

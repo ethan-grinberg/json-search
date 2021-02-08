@@ -5,9 +5,9 @@ import com.example.models.Book;
 import com.example.models.BookList;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -79,5 +79,38 @@ public class FilterBooksFromJsonTest {
             int birthYear = book.getBibliography().getAuthor().getBirthYear();
             assertTrue(birthYear >= 1900);
         }
+    }
+    //Books filtered by author's name.
+    @Test(expected = IllegalArgumentException.class)
+    public void testFilterByAuthorNotFound() {
+        List<Book> filteredBooks = BookFilters.filterByAuthorName(books, "John Green");
+    }
+    @Test
+    public void testFilterByAuthorUpperCase() {
+        List<Book> filteredBooks = BookFilters.filterByAuthorName(books, "TWAINMARK");
+        for (Book book: filteredBooks) {
+            String authorName = book.getBibliography().getAuthor().getName().toLowerCase();
+            assertEquals("twain, mark", authorName);
+        }
+    }
+    @Test
+    public void testFilterByAuthorCommas() {
+        List<Book> filteredBooks = BookFilters.filterByAuthorName(books, "twain,, mark");
+        for (Book book: filteredBooks) {
+            String authorName = book.getBibliography().getAuthor().getName().toLowerCase();
+            assertEquals("twain, mark", authorName);
+        }
+    }
+    @Test
+    public void testFilterByAuthorSpaces() {
+        List<Book> filteredBooks = BookFilters.filterByAuthorName(books, "   twain      mark   ");
+        for (Book book: filteredBooks) {
+            String authorName = book.getBibliography().getAuthor().getName().toLowerCase();
+            assertEquals("twain, mark", authorName);
+        }
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testFilterByAuthorIncompleteName() {
+        List<Book> filteredBooks = BookFilters.filterByAuthorName(books, "twain");
     }
 }

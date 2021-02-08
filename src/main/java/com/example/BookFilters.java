@@ -3,7 +3,6 @@ import com.example.models.Book;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 //TODO add all javadocs (utility class)
 public final class BookFilters {
@@ -92,6 +91,7 @@ public final class BookFilters {
         }
         return booksFilteredByAuthorYear;
     }
+    //TODO should be formatted as last name, first name, has to be full name
     public static List<Book> filterByAuthorName(
             final List<Book> bookList,
             final String author) {
@@ -104,7 +104,7 @@ public final class BookFilters {
         for (Book book : bookList) {
             String bookAuthor = book.getBibliography().getAuthor().getName();
             String formatBookAuthor = formatStringForSearch(bookAuthor);
-            if (formatBookAuthor.contains(authorFormatted)) {
+            if (formatBookAuthor.equals(authorFormatted)) {
                 filteredByAuthor.add(book);
             }
         }
