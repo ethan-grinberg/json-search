@@ -1,33 +1,33 @@
 package com.example;
-
 import com.example.models.Book;
 import com.example.models.BookList;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.FileNotFoundException;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+/**
+ * Unit test for the functions in the BookFilters utility class.
+ */
 
 public class BooksFromJsonFilterTest {
   private BookList fullBookList;
 
-  // TODO figure out style for long strings
   @Before
   public void setUp() throws FileNotFoundException {
-    BookList bookList = new BookList();
-    bookList.loadBooksFromJsonFile(
+    fullBookList = new BookList();
+    fullBookList.loadBooksFromJsonFile(
       "C:\\Users\\ethan\\Documents\\School\\CS126"
         + "\\Json\\src\\main\\resources\\classics.json");
-    fullBookList = bookList;
   }
-  //Sanity check for loading books from Json file
+  //Sanity check for loading books from a Json file.
   @Test
   public void sanityCheck() {
     assertEquals(1006, fullBookList.getBookList().size());
   }
-  // Books filtered by subjects tests.
+
+  //Books filtered by subjects tests.
   @Test
   public void testFilterBySubjectFound() {
     BookList filteredBooks = new BookList(
@@ -38,7 +38,6 @@ public class BooksFromJsonFilterTest {
       assertTrue(subjects.contains("fiction"));
     }
   }
-
   @Test(expected = IllegalArgumentException.class)
   public void testFilterBySubjectNotFound() {
     BookList filteredBooks = new BookList(
@@ -46,21 +45,19 @@ public class BooksFromJsonFilterTest {
     );
   }
 
-  // Books filtered by readability tests.
+  //Books filtered by readability tests.
   @Test(expected = IllegalArgumentException.class)
   public void testFilterByReadabilityIllegalNumber() {
     BookList filteredBooks = new BookList(
       BookFilters.filterByReadability(fullBookList.getBookList(), (float) -5.6)
     );
   }
-
   @Test(expected = IllegalArgumentException.class)
   public void testFilterByReadabilityNotFound() {
     BookList filteredBooks = new BookList(
       BookFilters.filterByReadability(fullBookList.getBookList(), (float) 2)
     );
   }
-
   @Test
   public void testFilterByReadabilityValid() {
     BookList filteredBooks = new BookList(
@@ -71,7 +68,8 @@ public class BooksFromJsonFilterTest {
       assertTrue(readabilityIndex <= (float) 6.3);
     }
   }
-  // Books filtered by author's birth year tests.
+
+  //Books filtered by author's birth year tests.
   @Test(expected = IllegalArgumentException.class)
   public void testFilterByYearInvalidYear() {
     BookList filteredBooks = new BookList(
@@ -79,7 +77,6 @@ public class BooksFromJsonFilterTest {
         fullBookList.getBookList(), -7000, false)
     );
   }
-
   @Test(expected = IllegalArgumentException.class)
   public void testFilterByYearNoneExistent() {
     BookList filteredBooks = new BookList(
@@ -87,7 +84,6 @@ public class BooksFromJsonFilterTest {
         fullBookList.getBookList(), 2015, false)
     );
   }
-
   @Test
   public void testFilterByYearBeforeBirth() {
     BookList filteredBooks = new BookList(
@@ -99,7 +95,6 @@ public class BooksFromJsonFilterTest {
       assertTrue(birthYear <= 1981);
     }
   }
-
   @Test
   public void testFilterByYearAfterBirth() {
     BookList filteredBooks = new BookList(
@@ -111,14 +106,14 @@ public class BooksFromJsonFilterTest {
       assertTrue(birthYear >= 1900);
     }
   }
-  // Books filtered by author's name.
+
+  //Books filtered by author's name tests.
   @Test(expected = IllegalArgumentException.class)
   public void testFilterByAuthorNotFound() {
     BookList filteredBooks = new BookList(
       BookFilters.filterByAuthorName(fullBookList.getBookList(), "John Green")
     );
   }
-
   @Test
   public void testFilterByAuthorUpperCase() {
     BookList filteredBooks = new BookList(BookFilters.filterByAuthorName(
@@ -129,7 +124,6 @@ public class BooksFromJsonFilterTest {
       assertEquals("twain, mark", authorName);
     }
   }
-
   @Test
   public void testFilterByAuthorCommas() {
     BookList filteredBooks = new BookList(
@@ -140,7 +134,6 @@ public class BooksFromJsonFilterTest {
       assertEquals("twain, mark", authorName);
     }
   }
-
   @Test
   public void testFilterByAuthorSpaces() {
     BookList filteredBooks = new BookList(
@@ -151,7 +144,6 @@ public class BooksFromJsonFilterTest {
       assertEquals("twain, mark", authorName);
     }
   }
-
   @Test(expected = IllegalArgumentException.class)
   public void testFilterByAuthorIncompleteName() {
     BookList filteredBooks = new BookList(

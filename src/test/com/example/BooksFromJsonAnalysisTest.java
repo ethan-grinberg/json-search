@@ -16,13 +16,11 @@ public class BooksFromJsonAnalysisTest {
 
   @Before
   public void setUp() throws FileNotFoundException {
-    BookList bookList = new BookList();
-    bookList.loadBooksFromJsonFile(
+    fullBookList = new BookList();
+    fullBookList.loadBooksFromJsonFile(
       "C:\\Users\\ethan\\Documents\\School\\CS126"
         + "\\Json\\src\\main\\resources\\classics.json");
-    fullBookList = bookList;
   }
-
   //Sanity check for loading the books from Json file
   @Test
   public void sanityCheck() {
