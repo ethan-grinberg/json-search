@@ -39,4 +39,13 @@ public class BookList {
   public List<Book> getBookList() {
     return bookList;
   }
+
+  @Override
+  public String toString() {
+    String booksAsString = "";
+    for (Book book : bookList) {
+      booksAsString += book;
+    }
+    return booksAsString;
+  }
 }

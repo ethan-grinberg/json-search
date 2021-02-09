@@ -1,35 +1,40 @@
 package com.example;
-
 import com.example.models.Book;
 import com.example.models.BookList;
 import java.io.IOException;
-import java.util.List;
 
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BookList bookList = new BookList();
-        bookList.loadBooksFromJsonFile("C:\\Users\\ethan\\Documents\\School\\CS126" +
-                                    "\\Json\\src\\main\\resources\\classics.json");
-        /*
-        System.out.println(bookList.size());
-        for (Book book : bookList) {
-            System.out.println(book);
-        }
-         */
-        /*
-        System.out.println(BookAnalyses.averageAuthorPolarity(bookList, "vonnegut kurt"));
-        List<Book> filteredBooks = BookFilters.filterByAuthorBirthYear(bookList,1000, false);
-        for (Book book : filteredBooks) {
-            System.out.println(book);
-        }
-         */
+        bookList.loadBooksFromJsonFile(
+          "C:\\Users\\ethan\\Documents\\School\\CS126"
+          + "\\Json\\src\\main\\resources\\classics.json");
+
+        //Size of json data set
+        System.out.println(bookList.getBookList().size());
+
+        //BookList filters
+        BookList filteredBySubjects = BookFilters.filterBySubjects(bookList, "England");
+        System.out.println(filteredBySubjects);
         System.out.println("-----------------");
-        /*
-        List<Book> subjectFilter = BookFilters.filterBySubjects(bookList, "Fiction");
-        for (Book book : subjectFilter) {
-            System.out.println(book);
-        }
-         */
+        BookList filteredByReadability = BookFilters.filterByReadability(bookList, (float) 10.5);
+        System.out.println(filteredByReadability);
+        System.out.println("-----------------");
+        BookList filteredByBirthYear = BookFilters.filterByAuthorBirthYear(bookList, 1000, true);
+        System.out.println(filteredByBirthYear);
+        System.out.println("-----------------");
+        BookList filteredyByAuthorName = BookFilters.filterByAuthorName(bookList, "vonnegutkurt");
+        System.out.println(filteredyByAuthorName);
+
+        //BookList Analysis
+        double averageAuthorPolarity = BookAnalyses.averageAuthorPolarity(bookList, "twainmark");
+        System.out.println(averageAuthorPolarity);
+        double averageNumberOfwords = BookAnalyses.averageNumberOfWordsByReadability(bookList, (float) 12);
+        System.out.println(averageNumberOfwords);
+        double averageNumberOfDownloads = BookAnalyses.averageNumOfBookDownloads(bookList);
+        System.out.println(averageNumberOfDownloads);
+        double maxNumberOfSentences = BookAnalyses.getMaxNumOfSentences(bookList);
+        System.out.println(maxNumberOfSentences);
     }
 }
