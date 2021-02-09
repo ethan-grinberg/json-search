@@ -83,4 +83,20 @@ public class BooksFromJsonAnalysisTest {
   public void testAverageNumDownloadsEmptyList() {
     double averageNumDownloads = BookAnalyses.averageNumOfBookDownloads(new ArrayList<Book>());
   }
+  //Max number of sentences
+  @Test
+  public void testMaxNumSentencesValid() {
+    BookList bookSubset = new BookList(fullBookList.getBookList().subList(85, 92));
+    int numSentences = BookAnalyses.getMaxNumOfSentences(bookSubset.getBookList());
+    assertEquals(9144, numSentences, .00001);
+  }
+  @Test(expected = IllegalArgumentException.class)
+  public void testMaxNumSentencesEmptyList() {
+    int numSentences = BookAnalyses.getMaxNumOfSentences(new ArrayList<Book>());
+  }
+  @Test(expected = IllegalArgumentException.class)
+  public void testMaxNumSentencesNullList() {
+    int numSentences = BookAnalyses.getMaxNumOfSentences(null);
+  }
+
 }

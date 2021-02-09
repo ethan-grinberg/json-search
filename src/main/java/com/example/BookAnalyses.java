@@ -54,4 +54,17 @@ public final class BookAnalyses {
     }
     return (double) totalDownloads / bookCount;
   }
+  public static int getMaxNumOfSentences(final List<Book> bookList) {
+    if (bookList == null || bookList.size() == 0) {
+      throw new IllegalArgumentException();
+    }
+    int numSentences = 0;
+    for (Book book : bookList) {
+      int numOfBookSentences = book.getMetrics().getStatistics().getNumOfSentences();
+      if (numOfBookSentences > numSentences) {
+        numSentences = numOfBookSentences;
+      }
+    }
+    return numSentences;
+  }
 }
