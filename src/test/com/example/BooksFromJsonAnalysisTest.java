@@ -30,16 +30,16 @@ public class BooksFromJsonAnalysisTest {
   //Average author polarity tests.
   @Test
   public void testAverageAuthorPolarityValid() {
-    double averagePolarity = BookAnalyses.averageAuthorPolarity(fullBookList.getBookList(), "vonnegut kurt");
+    double averagePolarity = BookAnalyses.averageAuthorPolarity(fullBookList, "vonnegut kurt");
     assertEquals(.136139, averagePolarity, .000001);
   }
   @Test(expected = IllegalArgumentException.class)
   public void testAverageAuthorPolarityAuthorNotFound() {
-    double averagePolarity = BookAnalyses.averageAuthorPolarity(fullBookList.getBookList(), "");
+    double averagePolarity = BookAnalyses.averageAuthorPolarity(fullBookList, "");
   }
   @Test(expected = IllegalArgumentException.class)
   public void testAverageAuthorPolarityNullAuthor() {
-    double averagePolarity = BookAnalyses.averageAuthorPolarity(fullBookList.getBookList(), null);
+    double averagePolarity = BookAnalyses.averageAuthorPolarity(fullBookList, null);
   }
   @Test(expected = IllegalArgumentException.class)
   public void testAverageAuthorPolarityNullBooks() {
@@ -50,28 +50,34 @@ public class BooksFromJsonAnalysisTest {
   @Test
   public void testAverageNumberOfWordsReadabilityValid() {
     BookList bookSubset = new BookList(fullBookList.getBookList().subList(0, 5));
-    double averageNumOfWords = BookAnalyses.averageNumberOfWordsByReadability(bookSubset.getBookList(), (float) 10);
+    double averageNumOfWords = BookAnalyses.averageNumberOfWordsByReadability(bookSubset, (float) 10);
     assertEquals(16228.0, averageNumOfWords, .001);
   }
   @Test(expected = IllegalArgumentException.class)
   public void testAverageNumbWordsReadabilityInvalid() {
-    double averageNumOfWords = BookAnalyses.averageNumberOfWordsByReadability(fullBookList.getBookList(), (float) -5);
+    double averageNumOfWords = BookAnalyses.averageNumberOfWordsByReadability(fullBookList, (float) -5);
   }
   @Test(expected = IllegalArgumentException.class)
   public void testAverageNumWordsReadabilityNotFound() {
     BookList bookSubset = new BookList(fullBookList.getBookList().subList(0, 5));
-    double averageNumOfWords = BookAnalyses.averageNumberOfWordsByReadability(bookSubset.getBookList(), (float) 6);
+    double averageNumOfWords = BookAnalyses.averageNumberOfWordsByReadability(bookSubset, (float) 6);
   }
   @Test(expected = IllegalArgumentException.class)
   public void testAverageNumWordsReadabilityNullList() {
     double averageNumOfWords = BookAnalyses.averageNumberOfWordsByReadability(null, (float) 6);
+  }
+  @Test(expected = IllegalArgumentException.class)
+  public void testAverageNumWordsReadabilityEmptyList() {
+    double averageNumOfWords = BookAnalyses.averageNumberOfWordsByReadability(
+      new BookList(new ArrayList<>()),
+      (float) 6);
   }
 
   //Average number of downloads tests.
   @Test
   public void testAverageNumDownloadsValid() {
     BookList bookSubset = new BookList(fullBookList.getBookList().subList(5, 10));
-    double averageNumDownloads = BookAnalyses.averageNumOfBookDownloads(bookSubset.getBookList());
+    double averageNumDownloads = BookAnalyses.averageNumOfBookDownloads(bookSubset);
     assertEquals(13328.2, averageNumDownloads, .001);
   }
   @Test(expected = IllegalArgumentException.class)
@@ -80,19 +86,19 @@ public class BooksFromJsonAnalysisTest {
   }
   @Test(expected = IllegalArgumentException.class)
   public void testAverageNumDownloadsEmptyList() {
-    double averageNumDownloads = BookAnalyses.averageNumOfBookDownloads(new ArrayList<Book>());
+    double averageNumDownloads = BookAnalyses.averageNumOfBookDownloads(new BookList(new ArrayList<Book>()));
   }
 
   //Max number of sentences tests.
   @Test
   public void testMaxNumSentencesValid() {
     BookList bookSubset = new BookList(fullBookList.getBookList().subList(85, 92));
-    int numSentences = BookAnalyses.getMaxNumOfSentences(bookSubset.getBookList());
+    int numSentences = BookAnalyses.getMaxNumOfSentences(bookSubset);
     assertEquals(9144, numSentences, .00001);
   }
   @Test(expected = IllegalArgumentException.class)
   public void testMaxNumSentencesEmptyList() {
-    int numSentences = BookAnalyses.getMaxNumOfSentences(new ArrayList<Book>());
+    int numSentences = BookAnalyses.getMaxNumOfSentences(new BookList(new ArrayList<Book>()));
   }
   @Test(expected = IllegalArgumentException.class)
   public void testMaxNumSentencesNullList() {

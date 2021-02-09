@@ -30,40 +30,30 @@ public class BooksFromJsonFilterTest {
   //Books filtered by subjects tests.
   @Test
   public void testFilterBySubjectFound() {
-    BookList filteredBooks = new BookList(
-      BookFilters.filterBySubjects(fullBookList.getBookList(), " FICtion   ")
-    );
-    for (Book book : filteredBooks.getBookList()) {
+    BookList filteredBookList = BookFilters.filterBySubjects(fullBookList, " FICtion   ");
+    for (Book book : filteredBookList.getBookList()) {
       String subjects = book.getBibliography().getSubjects().toLowerCase();
       assertTrue(subjects.contains("fiction"));
     }
   }
   @Test(expected = IllegalArgumentException.class)
   public void testFilterBySubjectNotFound() {
-    BookList filteredBooks = new BookList(
-      BookFilters.filterBySubjects(fullBookList.getBookList(), "asdfasdflkjiie12")
-    );
+    BookList filteredBookList = BookFilters.filterBySubjects(fullBookList, "asdfasdflkjiie12");
   }
 
   //Books filtered by readability tests.
   @Test(expected = IllegalArgumentException.class)
   public void testFilterByReadabilityIllegalNumber() {
-    BookList filteredBooks = new BookList(
-      BookFilters.filterByReadability(fullBookList.getBookList(), (float) -5.6)
-    );
+    BookList filteredBookList = BookFilters.filterByReadability(fullBookList, (float) -5.6);
   }
   @Test(expected = IllegalArgumentException.class)
   public void testFilterByReadabilityNotFound() {
-    BookList filteredBooks = new BookList(
-      BookFilters.filterByReadability(fullBookList.getBookList(), (float) 2)
-    );
+    BookList filteredBookList = BookFilters.filterByReadability(fullBookList, (float) 2);
   }
   @Test
   public void testFilterByReadabilityValid() {
-    BookList filteredBooks = new BookList(
-      BookFilters.filterByReadability(fullBookList.getBookList(), (float) 6.3)
-    );
-    for (Book book : filteredBooks.getBookList()) {
+    BookList filteredBookList = BookFilters.filterByReadability(fullBookList, (float) 6.3);
+    for (Book book : filteredBookList.getBookList()) {
       float readabilityIndex = book.getMetrics().getDifficulty().getReadabilityIndex();
       assertTrue(readabilityIndex <= (float) 6.3);
     }
@@ -72,36 +62,24 @@ public class BooksFromJsonFilterTest {
   //Books filtered by author's birth year tests.
   @Test(expected = IllegalArgumentException.class)
   public void testFilterByYearInvalidYear() {
-    BookList filteredBooks = new BookList(
-      BookFilters.filterByAuthorBirthYear(
-        fullBookList.getBookList(), -7000, false)
-    );
+    BookList filteredBookList = BookFilters.filterByAuthorBirthYear(fullBookList, -7000, false);
   }
   @Test(expected = IllegalArgumentException.class)
   public void testFilterByYearNoneExistent() {
-    BookList filteredBooks = new BookList(
-      BookFilters.filterByAuthorBirthYear(
-        fullBookList.getBookList(), 2015, false)
-    );
+    BookList filteredBookList = BookFilters.filterByAuthorBirthYear(fullBookList, 2015, false);
   }
   @Test
   public void testFilterByYearBeforeBirth() {
-    BookList filteredBooks = new BookList(
-      BookFilters.filterByAuthorBirthYear(
-        fullBookList.getBookList(), 1981, true)
-    );
-    for (Book book : filteredBooks.getBookList()) {
+    BookList filteredBookList = BookFilters.filterByAuthorBirthYear(fullBookList, 1981, true);
+    for (Book book : filteredBookList.getBookList()) {
       int birthYear = book.getBibliography().getAuthor().getBirthYear();
       assertTrue(birthYear <= 1981);
     }
   }
   @Test
   public void testFilterByYearAfterBirth() {
-    BookList filteredBooks = new BookList(
-      BookFilters.filterByAuthorBirthYear(
-        fullBookList.getBookList(), 1900, false)
-    );
-    for (Book book : filteredBooks.getBookList()) {
+    BookList filteredBookList = BookFilters.filterByAuthorBirthYear(fullBookList, 1900, false);
+    for (Book book : filteredBookList.getBookList()) {
       int birthYear = book.getBibliography().getAuthor().getBirthYear();
       assertTrue(birthYear >= 1900);
     }
@@ -110,44 +88,34 @@ public class BooksFromJsonFilterTest {
   //Books filtered by author's name tests.
   @Test(expected = IllegalArgumentException.class)
   public void testFilterByAuthorNotFound() {
-    BookList filteredBooks = new BookList(
-      BookFilters.filterByAuthorName(fullBookList.getBookList(), "John Green")
-    );
+    BookList filteredBookList = BookFilters.filterByAuthorName(fullBookList, "John Green");
   }
   @Test
   public void testFilterByAuthorUpperCase() {
-    BookList filteredBooks = new BookList(BookFilters.filterByAuthorName(
-      fullBookList.getBookList(), "TWAINMARK")
-    );
-    for (Book book : filteredBooks.getBookList()) {
+    BookList filteredBookList = BookFilters.filterByAuthorName(fullBookList, "TWAINMARK");
+    for (Book book : filteredBookList.getBookList()) {
       String authorName = book.getBibliography().getAuthor().getName().toLowerCase();
       assertEquals("twain, mark", authorName);
     }
   }
   @Test
   public void testFilterByAuthorCommas() {
-    BookList filteredBooks = new BookList(
-      BookFilters.filterByAuthorName(fullBookList.getBookList(), "twain,, mark")
-    );
-    for (Book book : filteredBooks.getBookList()) {
+    BookList filteredBookList = BookFilters.filterByAuthorName(fullBookList, "twain,, mark");
+    for (Book book : filteredBookList.getBookList()) {
       String authorName = book.getBibliography().getAuthor().getName().toLowerCase();
       assertEquals("twain, mark", authorName);
     }
   }
   @Test
   public void testFilterByAuthorSpaces() {
-    BookList filteredBooks = new BookList(
-        BookFilters.filterByAuthorName(fullBookList.getBookList(), "   twain      mark   ")
-    );
-    for (Book book : filteredBooks.getBookList()) {
+    BookList filteredBookList = BookFilters.filterByAuthorName(fullBookList, "   twain      mark   ");
+    for (Book book : filteredBookList.getBookList()) {
       String authorName = book.getBibliography().getAuthor().getName().toLowerCase();
       assertEquals("twain, mark", authorName);
     }
   }
   @Test(expected = IllegalArgumentException.class)
   public void testFilterByAuthorIncompleteName() {
-    BookList filteredBooks = new BookList(
-      BookFilters.filterByAuthorName(fullBookList.getBookList(), "twain")
-    );
+    BookList filteredBookList = BookFilters.filterByAuthorName(fullBookList, "twain");
   }
 }

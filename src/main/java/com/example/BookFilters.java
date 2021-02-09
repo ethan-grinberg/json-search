@@ -1,11 +1,13 @@
 package com.example;
-
 import com.example.models.Book;
+import com.example.models.BookList;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-// TODO add all javadocs (utility class)
+/** Utility class for filtering Book Lists. */
+
 public final class BookFilters {
   // Helper function that returns the string in lowercase without spaces or commas.
   // Code below delivered from:
@@ -15,7 +17,7 @@ public final class BookFilters {
     return str.replaceAll(",", "");
   }
 
-  public static List<Book> filterBySubjects(final List<Book> bookList, String subject) {
+  public static BookList filterBySubjects(final BookList bookList, String subject) {
 
     if (bookList == null || subject == null) {
       throw new IllegalArgumentException();
@@ -23,7 +25,7 @@ public final class BookFilters {
     String subjectFormatted = formatStringForSearch(subject);
 
     List<Book> booksFilteredBySubject = new ArrayList<>();
-    for (Book book : bookList) {
+    for (Book book : bookList.getBookList()) {
       String bookSubject = book.getBibliography().getSubjects();
       String bookSubjectFormatted = formatStringForSearch(bookSubject);
 
@@ -34,17 +36,18 @@ public final class BookFilters {
     if (booksFilteredBySubject.size() == 0) {
       throw new IllegalArgumentException();
     }
-    return booksFilteredBySubject;
+    return new BookList(booksFilteredBySubject);
   }
+
   // TODO add javadoc, readabilityIndex is upper bound
-  public static List<Book> filterByReadability(
-      final List<Book> bookList, final float readabilityIndex) {
+  public static BookList filterByReadability(
+      final BookList bookList, final float readabilityIndex) {
 
     if (bookList == null || readabilityIndex <= 0) {
       throw new IllegalArgumentException();
     }
     List<Book> booksFilteredByReadability = new ArrayList<>();
-    for (Book book : bookList) {
+    for (Book book : bookList.getBookList()) {
       if (book.getMetrics().getDifficulty().getReadabilityIndex() <= readabilityIndex) {
         booksFilteredByReadability.add(book);
       }
@@ -52,12 +55,12 @@ public final class BookFilters {
     if (booksFilteredByReadability.size() == 0) {
       throw new IllegalArgumentException();
     }
-    return booksFilteredByReadability;
+    return new BookList(booksFilteredByReadability);
   }
   // TODO books can be before or after author death year Inclusive
   // TODO how to format big function argument?
-  public static List<Book> filterByAuthorBirthYear(
-      final List<Book> bookList, final int birthYear, boolean beforeBirthYear) {
+  public static BookList filterByAuthorBirthYear(
+      final BookList bookList, final int birthYear, boolean beforeBirthYear) {
 
     if (bookList == null) {
       throw new IllegalArgumentException();
@@ -71,7 +74,7 @@ public final class BookFilters {
       throw new IllegalArgumentException();
     }
     List<Book> booksFilteredByAuthorYear = new ArrayList<>();
-    for (Book book : bookList) {
+    for (Book book : bookList.getBookList()) {
       int authorBirthYear = book.getBibliography().getAuthor().getBirthYear();
       if (beforeBirthYear) {
         if (authorBirthYear <= birthYear) {
@@ -86,17 +89,17 @@ public final class BookFilters {
     if (booksFilteredByAuthorYear.size() == 0) {
       throw new IllegalArgumentException();
     }
-    return booksFilteredByAuthorYear;
+    return new BookList(booksFilteredByAuthorYear);
   }
   // TODO should be formatted as last name, first name, has to be full name
-  public static List<Book> filterByAuthorName(final List<Book> bookList, final String author) {
+  public static BookList filterByAuthorName(final BookList bookList, final String author) {
 
     if (bookList == null || author == null) {
       throw new IllegalArgumentException();
     }
     String authorFormatted = formatStringForSearch(author);
     List<Book> filteredByAuthor = new ArrayList<>();
-    for (Book book : bookList) {
+    for (Book book : bookList.getBookList()) {
       String bookAuthor = book.getBibliography().getAuthor().getName();
       String formatBookAuthor = formatStringForSearch(bookAuthor);
       if (formatBookAuthor.equals(authorFormatted)) {
@@ -106,6 +109,6 @@ public final class BookFilters {
     if (filteredByAuthor.size() == 0) {
       throw new IllegalArgumentException();
     }
-    return filteredByAuthor;
+    return new BookList(filteredByAuthor);
   }
 }
