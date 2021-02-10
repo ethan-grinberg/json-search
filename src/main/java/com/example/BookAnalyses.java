@@ -82,7 +82,7 @@ public final class BookAnalyses {
   /**
    * Finds the maximum number of sentences in a BookList.
    * @param bookList A BookList object
-   * @return The average number of downloads as a double
+   * @return The maximum number of sentences as an int
    */
   public static int getMaxNumOfSentences(final BookList bookList) {
     if (bookList == null || bookList.getBookList().size() == 0) {
