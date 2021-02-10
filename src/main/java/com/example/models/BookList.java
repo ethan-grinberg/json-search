@@ -40,6 +40,9 @@ public class BookList {
     Gson gson = new Gson();
     File file = new File(filePath);
     JsonReader reader = new JsonReader(new FileReader(file));
+
+    //Code derived from:
+    //https://howtodoinjava.com/gson/gson-parse-json-array/
     Type booksType = new TypeToken<List<Book>>() {}.getType();
 
     bookList = gson.fromJson(reader, booksType);

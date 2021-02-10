@@ -5,6 +5,7 @@ import com.example.models.MetaData.MetaData;
 import com.example.models.Metrics.Metrics;
 import com.google.gson.annotations.SerializedName;
 
+/** Stores all the data for a single Book. */
 public class Book {
   private Bibliography bibliography;
   @SerializedName("metadata")
