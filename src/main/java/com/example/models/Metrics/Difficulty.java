@@ -3,13 +3,15 @@ package com.example.models.Metrics;
 import com.google.gson.annotations.SerializedName;
 
 public class Difficulty {
-    @SerializedName("automated readability index")
-    private float readabilityIndex;
+  @SerializedName("automated readability index")
+  private float readabilityIndex;
 
-    public Difficulty() { }
+  public Difficulty() {}
 
-    //TODO add javadocs for public methods
-    public float getReadabilityIndex() {
-        return readabilityIndex;
-    }
+  /**
+   * @return readabilityIndex as a float
+   */
+  public float getReadabilityIndex() {
+    return readabilityIndex;
+  }
 }

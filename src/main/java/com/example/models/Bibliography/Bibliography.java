@@ -1,33 +1,60 @@
 package com.example.models.Bibliography;
 
 public class Bibliography {
-    private String languages;
-    private String subjects;
-    private String title;
-    private String type;
-    private Author author;
-    //TODO add java docs for all these public methods
-    public Bibliography() {
-    }
-    public String getLanguages() {
-        return languages;
-    }
-    public String getSubjects() {
-        return subjects;
-    }
-    public String getTitle() {
-        return title;
-    }
-    public String getType() {
-        return type;
-    }
-    public Author getAuthor() {
-        return author;
-    }
-    @Override
-    public String toString() {
-        return "Bibliography: " + languages + ", " + subjects
-                + ", " + title + ", " + type + ", " + author;
-    }
+  private String languages;
+  private String subjects;
+  private String title;
+  private String type;
+  private Author author;
 
+  public Bibliography() {}
+
+ /**
+  * @return languages as String
+  */
+  public String getLanguages() {
+    return languages;
+  }
+
+  /**
+   * @return subjects as String
+   */
+  public String getSubjects() {
+    return subjects;
+  }
+
+  /**
+   * @return title as String
+   */
+  public String getTitle() {
+    return title;
+  }
+
+  /**
+   * @return type of medium as String
+   */
+  public String getType() {
+    return type;
+  }
+
+  /**
+   * @return author object
+   */
+  public Author getAuthor() {
+    return author;
+  }
+
+  @Override
+  public String toString() {
+    return "Bibliography: "
+        + languages
+        + ", "
+        + subjects
+        + ", "
+        + title
+        + ", "
+        + type
+        + ", "
+        + author;
+  }
 }

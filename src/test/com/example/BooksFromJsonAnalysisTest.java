@@ -1,4 +1,5 @@
 package com.example;
+
 import com.example.models.Book;
 import com.example.models.BookList;
 import org.junit.Before;
@@ -86,7 +87,7 @@ public class BooksFromJsonAnalysisTest {
   }
   @Test(expected = IllegalArgumentException.class)
   public void testAverageNumDownloadsEmptyList() {
-    double averageNumDownloads = BookAnalyses.averageNumOfBookDownloads(new BookList(new ArrayList<Book>()));
+    double averageNumDownloads = BookAnalyses.averageNumOfBookDownloads(new BookList(new ArrayList<>()));
   }
 
   //Max number of sentences tests.
@@ -98,7 +99,7 @@ public class BooksFromJsonAnalysisTest {
   }
   @Test(expected = IllegalArgumentException.class)
   public void testMaxNumSentencesEmptyList() {
-    int numSentences = BookAnalyses.getMaxNumOfSentences(new BookList(new ArrayList<Book>()));
+    int numSentences = BookAnalyses.getMaxNumOfSentences(new BookList(new ArrayList<>()));
   }
   @Test(expected = IllegalArgumentException.class)
   public void testMaxNumSentencesNullList() {

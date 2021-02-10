@@ -1,30 +1,51 @@
 package com.example.models.Metrics;
 
 public class Metrics {
-    private Difficulty difficulty;
-    private Sentiments sentiments;
-    private Statistics statistics;
-    //TODO add javadocs for public methods
-    public Metrics() { }
+  private Difficulty difficulty;
+  private Sentiments sentiments;
+  private Statistics statistics;
 
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
+  public Metrics() {}
 
-    public Sentiments getSentiments() {
-        return sentiments;
-    }
+  /**
+   * @return difficulty object
+   */
+  public Difficulty getDifficulty() {
+    return difficulty;
+  }
 
-    public Statistics getStatistics() {
-        return statistics;
-    }
+  /**
+   * @return sentiments object
+   */
+  public Sentiments getSentiments() {
+    return sentiments;
+  }
 
-    @Override
-    public String toString() {
-        return "Metrics\n[statistics: " + statistics.getNumOfCharacters() + ", "
-                + statistics.getAverageSentenceLength() + ", " + statistics.getNumOfSentences() + ", "
-                + statistics.getNumOfWords() + "]\n" + "[sentiments: " + sentiments.getPolarity()
-                + ", " + sentiments.getSubjectivity() + "]\n" + "[ difficulty: " + difficulty.getReadabilityIndex()
-                + "]";
-    }
+  /**
+   * @return statistics object
+   */
+  public Statistics getStatistics() {
+    return statistics;
+  }
+
+  @Override
+  public String toString() {
+    return "Metrics\n[statistics: "
+        + statistics.getNumOfCharacters()
+        + ", "
+        + statistics.getAverageSentenceLength()
+        + ", "
+        + statistics.getNumOfSentences()
+        + ", "
+        + statistics.getNumOfWords()
+        + "]\n"
+        + "[sentiments: "
+        + sentiments.getPolarity()
+        + ", "
+        + sentiments.getSubjectivity()
+        + "]\n"
+        + "[ difficulty: "
+        + difficulty.getReadabilityIndex()
+        + "]";
+  }
 }

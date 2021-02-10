@@ -6,29 +6,36 @@ import com.example.models.Metrics.Metrics;
 import com.google.gson.annotations.SerializedName;
 
 public class Book {
-    private Bibliography bibliography;
-    @SerializedName("metadata")
-    private MetaData metaData;
-    private Metrics metrics;
+  private Bibliography bibliography;
+  @SerializedName("metadata")
+  private MetaData metaData;
+  private Metrics metrics;
 
-    //TODO add javadoc for public methods
-    public Book() { }
+  public Book() {}
 
-    public Bibliography getBibliography() {
-        return bibliography;
-    }
+  /**
+   * @return current bibliography object
+   */
+  public Bibliography getBibliography() {
+    return bibliography;
+  }
 
-    public MetaData getMetaData() {
-        return metaData;
-    }
+  /**
+   * @return current metaData object
+   */
+  public MetaData getMetaData() {
+    return metaData;
+  }
 
-    public Metrics getMetrics() {
-        return metrics;
-    }
+  /**
+   * @return current metrics object
+   */
+  public Metrics getMetrics() {
+    return metrics;
+  }
 
-    @Override
-    public String toString() {
-        return bibliography + "\n" + metrics
-                + "\n" + metaData + "\n";
-    }
+  @Override
+  public String toString() {
+    return bibliography + "\n" + metrics + "\n" + metaData + "\n";
+  }
 }
