@@ -28,9 +28,10 @@ public class BooksFromJsonAnalysisTest {
   }
 
   //Average author polarity tests.
+  //Filter by author name was thoroughly tested in BooksFromJsonFilterTest.java.
   @Test
   public void testAverageAuthorPolarityValid() {
-    double averagePolarity = BookAnalyses.averageAuthorPolarity(fullBookList, "vonnegut kurt");
+    double averagePolarity = BookAnalyses.averageAuthorPolarity(fullBookList, "vonnegut,kurt");
     assertEquals(.136139, averagePolarity, .000001);
   }
   @Test(expected = IllegalArgumentException.class)
@@ -42,8 +43,12 @@ public class BooksFromJsonAnalysisTest {
     double averagePolarity = BookAnalyses.averageAuthorPolarity(fullBookList, null);
   }
   @Test(expected = IllegalArgumentException.class)
-  public void testAverageAuthorPolarityNullBooks() {
-    double averagePolarity = BookAnalyses.averageAuthorPolarity(null, "mark,twain");
+  public void testAverageAuthorPolarityNullList() {
+    double averagePolarity = BookAnalyses.averageAuthorPolarity(null, "twain,mark");
+  }
+  @Test(expected = IllegalArgumentException.class)
+  public void testAverageAuthorPolarityEmptyList() {
+    double averagePolarity = BookAnalyses.averageAuthorPolarity(new BookList(new ArrayList<>()), "twain, mark");
   }
 
   //Average number of words by readability tests.
@@ -64,13 +69,13 @@ public class BooksFromJsonAnalysisTest {
   }
   @Test(expected = IllegalArgumentException.class)
   public void testAverageNumWordsReadabilityNullList() {
-    double averageNumOfWords = BookAnalyses.averageNumberOfWordsByReadability(null, (float) 6);
+    double averageNumOfWords = BookAnalyses.averageNumberOfWordsByReadability(null, (float) 10);
   }
   @Test(expected = IllegalArgumentException.class)
   public void testAverageNumWordsReadabilityEmptyList() {
     double averageNumOfWords = BookAnalyses.averageNumberOfWordsByReadability(
       new BookList(new ArrayList<>()),
-      (float) 6);
+      (float) 10);
   }
 
   //Average number of downloads tests.
